@@ -232,7 +232,7 @@ func (ut *udpConnTrack) run() {
 
 	ut.socksConn.SetDeadline(time.Time{})
 	// monitor socks TCP connection
-	go gosocks.ConnMonitor(ut.socksConn, ut.socksClosed)
+	go gosocks.ConnMonitor(ut.socksConn, make(chan bool))
 	// read UDP packets from relay
 	quitUDP := make(chan bool)
 	chRelayUDP := make(chan *gosocks.UDPPacket)
